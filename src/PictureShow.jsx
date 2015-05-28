@@ -23,7 +23,13 @@ var throttle = require('lodash/function/throttle'),
     "psWrap" : {
       "position": "relative",
       "width": "100%",
-      "height": "0"
+      "height": "0",
+      "WebkitTransition": "padding-bottom 400ms cubic-bezier(0.365, 0.45, 0.23, 0.95)",
+         "MozTransition": "padding-bottom 400ms cubic-bezier(0.365, 0.45, 0.23, 0.95)",
+            "transition": "padding-bottom 400ms cubic-bezier(0.365, 0.45, 0.23, 0.95)",
+      "WebkitTransitionTimingFunction": "cubic-bezier(0.365, 0.45, 0.23, 0.95)",
+         "MozTransitionTimingFunction": "cubic-bezier(0.365, 0.45, 0.23, 0.95)",
+             "transitionTimingFunction": "cubic-bezier(0.365, 0.45, 0.23, 0.95)"
     },
 
     "psWrapStretch": {
