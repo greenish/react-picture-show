@@ -254,6 +254,7 @@ module.exports = PictureShow = React.createClass({
   },
 
   _handleSwiping: function () {
+
     // TODO: track finger
     this.setState({
       swiping: true
@@ -365,8 +366,8 @@ module.exports = PictureShow = React.createClass({
       <Swipeable
         className={mainClass}
         onSwiped={this._handleSwipe}
-        onSwipeRight={this._handleSwiping}
-        onSwipeLeft={this._handleSwiping}
+        onSwipedRight={this._handleSwiping}
+        onSwipedLeft={this._handleSwiping}
         style={assign({}, css.pictureShow, pictureShowStretch)}>
         <div className='ps-wrap' style={assign({}, css.psWrap, psWrapStretch, wrapStyle)} ref='wrap'>
           {['A','B','C'].map(function (key) {
