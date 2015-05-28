@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "lodash": "^3.3.1",
+    "react-inline-style" : "git://github.dowjones.net/adrianp/react-inline-style.git#master",
     "react-swipeable": "^3.0.2"
   }
 }

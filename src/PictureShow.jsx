@@ -2,12 +2,12 @@
 /* globals window, navigator */
 
 var throttle = require('lodash/function/throttle'),
-  assign = require('lodash/object/assign'),
   React = require('react'),
   Swipeable = require('react-swipeable'),
+  style = require('react-inline-style'),
   noop = function () {},
   PictureShow,
-  css = {
+  style = style.define({
     "pictureShow" : {
       "overflow": "hidden",
       "WebkitBoxBizing": "border-box",
@@ -23,13 +23,7 @@ var throttle = require('lodash/function/throttle'),
     "psWrap" : {
       "position": "relative",
       "width": "100%",
-      "height": "0",
-      "WebkitTransition": "padding-bottom 400ms cubic-bezier(0.365, 0.45, 0.23, 0.95)",
-         "MozTransition": "padding-bottom 400ms cubic-bezier(0.365, 0.45, 0.23, 0.95)",
-            "transition": "padding-bottom 400ms cubic-bezier(0.365, 0.45, 0.23, 0.95)",
-      "WebkitTransitionTimingFunction": "cubic-bezier(0.365, 0.45, 0.23, 0.95)",
-         "MozTransitionTimingFunction": "cubic-bezier(0.365, 0.45, 0.23, 0.95)",
-             "transitionTimingFunction": "cubic-bezier(0.365, 0.45, 0.23, 0.95)"
+      "height": "0"
     },
 
     "psWrapStretch": {
@@ -70,7 +64,7 @@ var throttle = require('lodash/function/throttle'),
             "msUserSelect": "none",
                 "userSelect": "none"
     }
-  };
+  });
 // speed expressed in px/second
 // returns milliseconds
 function getTransitionTime (distance, speed) {
@@ -97,6 +91,7 @@ function getInternetExplorerVersion(minimum) {
 
 module.exports = PictureShow = React.createClass({
 
+  mixins : [style()],
   propTypes: {
     ratio: React.PropTypes.array,
     animationSpeed: React.PropTypes.number,
@@ -332,9 +327,9 @@ module.exports = PictureShow = React.createClass({
       this.props.className
     ].join(' ');
 
-    var pictureShowStretch = !this.props.ratio ? css.pictureShowStretch : {};
+    var pictureShowStretch = !this.props.ratio ? "pictureShowStretch" : "";
 
-    var psWrapStretch = !this.props.ratio ? css.psWrapStretch : {};
+    var psWrapStretch = !this.props.ratio ? "psWrapStretch" : "";
 
     var wrapStyle = this.props.ratio ? {
       paddingBottom: (ratio[1] / ratio[0] * 100 ).toFixed(4) + "%"
@@ -361,7 +356,7 @@ module.exports = PictureShow = React.createClass({
       }
 
       slides.push(
-        <div className='ps-slide-wrap' key={idx} style={assign({}, css.psSlideWrap, slideStyle)}>
+        <div className='ps-slide-wrap' key={idx} style={this.css("psSlideWrap", slideStyle)}>
           {slideContent}
         </div>
       );
@@ -374,12 +369,12 @@ module.exports = PictureShow = React.createClass({
         onSwiped={this._handleSwipe}
         onSwipedRight={this._handleSwiping}
         onSwipedLeft={this._handleSwiping}
-        style={assign({}, css.pictureShow, pictureShowStretch)}>
-        <div className='ps-wrap' style={assign({}, css.psWrap, psWrapStretch, wrapStyle)} ref='wrap'>
+        style={this.css("pictureShow", pictureShowStretch)}>
+        <div className='ps-wrap' style={this.css("psWrap", psWrapStretch, wrapStyle)} ref='wrap'>
           {['A','B','C'].map(function (key) {
             var panelStyle = this._getPanelStyle(this.state.panels.indexOf(key), key);
             return (
-              <div className='ps-slides' key={key} style={assign({}, css.psSlides, panelStyle)} onMouseDown={this._handleSlideClick}>
+              <div className='ps-slides' key={key} style={this.css("psSlides", panelStyle)} onMouseDown={this._handleSlideClick}>
                 {slides}
               </div>
             );
