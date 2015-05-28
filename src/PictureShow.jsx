@@ -3,7 +3,7 @@
 
 var throttle = require('lodash/function/throttle'),
   assign = require('lodash/object/assign'),
-  React = require('react/addons'),
+  React = require('react'),
   Swipeable = require('react-swipeable'),
   noop = function () {},
   PictureShow,
@@ -348,7 +348,7 @@ module.exports = PictureShow = React.createClass({
       if (this.props.suppressPending && isPending) {
         slideContent = null;
       } else {
-        slideContent = React.addons.cloneWithProps(slide, {
+        slideContent = React.cloneElement(slide, {
           slideRatio: ratio,
           slidePending: isPending
         });

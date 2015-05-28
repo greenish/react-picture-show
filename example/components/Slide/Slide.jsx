@@ -18,13 +18,13 @@ module.exports = Slide = React.createClass({
     src: React.PropTypes.string,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
-    slideRatio: React.PropTypes.number,
+    slideRatio: React.PropTypes.array,
     slidePending: React.PropTypes.bool
   },
 
   getDefaultProps: function () {
     return {
-      slideRatio: 1
+      slideRatio: [1,1]
     };
   },
 
